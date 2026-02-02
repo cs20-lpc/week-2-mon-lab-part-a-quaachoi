@@ -8,7 +8,7 @@ using namespace std;
  * Function prototypes
 *******************************************************************************/
 
-void populate(string*, const unsigned);
+void populate(string*&, const unsigned);
 void printFoods(string*, const unsigned);
 
 /*******************************************************************************
@@ -42,7 +42,7 @@ int main() {
     printFoods(dynArr, userSize);
 
     // TODO: release the dynamic memory to avoid a memory leak
-
+    delete[] dynArr;
     // terminate
     return 0;
 }
@@ -60,8 +60,14 @@ int main() {
  * N/A
 *******************************************************************************/
 
-void populate(string* arrPtr, const unsigned ARR_SIZE) {
-    // TODO
+void populate(string*& arrPtr, const unsigned ARR_SIZE) {
+    arrPtr = new string[ARR_SIZE];
+    for(int i = 0; i < ARR_SIZE; i++)
+    {
+        cout << "Enter food order #" << i+1 << ": ";
+
+        cin >> arrPtr[i];
+    }
 }
 
 /*******************************************************************************
@@ -79,5 +85,12 @@ void populate(string* arrPtr, const unsigned ARR_SIZE) {
 *******************************************************************************/
 
 void printFoods(string* arrPtr, const unsigned ARR_SIZE) {
-    // TODO
+    for(int i = 0; i < ARR_SIZE; i++)
+    {
+        cout << "=========================================" << endl;
+        cout << "Food order #" << i+1 << endl;
+        cout << arrPtr[i] << endl;
+        cout << "(address is " << &arrPtr[i] << ")" << endl;
+        cout << "=========================================" << endl;
+    }
 }
